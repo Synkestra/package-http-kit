@@ -1,9 +1,9 @@
 {
-    "name": "@mutual-processadora-de-pagamentos/lib-http-kit",
+    "name": "@synkestra/lib-http-kit",
     "version": "2.0.2",
     "description": "Example HTTP helper library",
     "license": "UNLICENSED",
-    "author": "Mutual Processadora de Pagamentos",
+    "author": "Synkestra",
     "type": "module",
     "main": "./dist/index.cjs",
     "module": "./dist/index.js",
@@ -19,7 +19,7 @@
         "dist"
     ],
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com/@Mutual-Processadora-de-Pagamentos"
+        "registry": "https://npm.pkg.github.com"
     },
     "packageManager": "pnpm@9.12.1",
     "scripts": {
