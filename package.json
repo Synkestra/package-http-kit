@@ -1,9 +1,9 @@
 {
-    "name": "@synkestra/http-kit",
-    "version": "2.0.2",
+    "name": "@authyon/http",
+    "version": "0.1.0",
     "description": "Example HTTP helper library",
     "license": "UNLICENSED",
-    "author": "Synkestra",
+    "author": "Authyon",
     "type": "module",
     "main": "./dist/index.cjs",
     "module": "./dist/index.js",
@@ -19,7 +19,7 @@
         "dist"
     ],
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "access": "public"
     },
     "packageManager": "pnpm@9.12.1",
     "scripts": {

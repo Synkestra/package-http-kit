@@ -31,7 +31,7 @@
 ## Instalação
 
 ```bash
-pnpm add @synkestra/lib-http-kit
+pnpm add @authyon/http
 ```
 
 **Peer dependencies:**
@@ -52,7 +52,7 @@ AUTH_SERVICE_URL=https://auth.example.com
 ## Quick Start
 
 ```typescript
-import { ExpressAdapter } from "@synkestra/lib-http-kit";
+import { ExpressAdapter } from "@authyon/http";
 import { UserController } from "./controllers/UserController";
 
 const adapter = ExpressAdapter.create({
@@ -147,7 +147,7 @@ import {
   type Req,
   type ReqBody,
   type Res,
-} from "@synkestra/lib-http-kit";
+} from "@authyon/http";
 import { z } from "zod";
 
 const CreateUserSchema = z.object({
@@ -236,7 +236,7 @@ export class PaymentController extends BaseController {
 Para rotas avulsas (sem controller):
 
 ```typescript
-import { route } from "@synkestra/lib-http-kit";
+import { route } from "@authyon/http";
 import { z } from "zod";
 
 const healthRoute = route({
@@ -286,7 +286,7 @@ Valida token JWT e verifica permissões do usuário. Suporta tokens do tipo `PAS
 import {
   Authorize,
   type AuthorizedReq,
-} from "@synkestra/lib-http-kit";
+} from "@authyon/http";
 
 export class MemberController extends BaseController {
   readonly basePath = "/members";
@@ -308,7 +308,7 @@ export class MemberController extends BaseController {
 **Como função middleware (sem controller):**
 
 ```typescript
-import { authorize } from "@synkestra/lib-http-kit";
+import { authorize } from "@authyon/http";
 
 app.get("/users", authorize({ permissions: ["MEMBER:READ"] }), (req, res) => {
   res.json([]);
@@ -360,7 +360,7 @@ Valida token JWT e verifica permissões específicas do tenant via endpoint sepa
 import {
   TenantAuthorize,
   type TenantAuthorizedReq,
-} from "@synkestra/lib-http-kit";
+} from "@authyon/http";
 
 export class SettingsController extends BaseController {
   readonly basePath = "/settings";
@@ -405,7 +405,7 @@ Restringe acesso a IPs internos (redes privadas e/ou allowlist).
 **Como decorator:**
 
 ```typescript
-import { InternalOnly } from "@synkestra/lib-http-kit";
+import { InternalOnly } from "@authyon/http";
 
 export class InternalController extends BaseController {
   readonly basePath = "/internal";
@@ -481,7 +481,7 @@ Formato: `RECURSO:AÇÃO` ou `RECURSO.SUB_RECURSO:AÇÃO`
 Gerencia e valida permissões a partir de um array flat.
 
 ```typescript
-import { PermissionManager } from "@synkestra/lib-http-kit";
+import { PermissionManager } from "@authyon/http";
 
 const perms = PermissionManager.fromJSON([
   "MEMBER:READ",
@@ -506,7 +506,7 @@ admin.has("PAYMENT.PIX_OUT:WRITE"); // true
 Utilitários para validação e normalização de permissões.
 
 ```typescript
-import { PermissionUtils } from "@synkestra/lib-http-kit";
+import { PermissionUtils } from "@authyon/http";
 
 // Retorna apenas permissões válidas (remove strings inválidas)
 PermissionUtils.filterValid(["MEMBER:READ", "INVALIDO", "WEBHOOK:WRITE"]);
@@ -535,7 +535,7 @@ import {
   BadRequestError,
   NotFoundError,
   ForbiddenError,
-} from "@synkestra/lib-http-kit";
+} from "@authyon/http";
 
 // Lança → 400
 throw new BadRequestError("Campo obrigatório", "MISSING_FIELD");
@@ -708,7 +708,7 @@ queueSize.set({ priority: "high" }, 5);
 import {
   MetricsManager,
   metricsMiddleware,
-} from "@synkestra/lib-http-kit";
+} from "@authyon/http";
 import express from "express";
 
 const app = express();
@@ -731,7 +731,7 @@ app.get("/metrics", async (_req, res) => {
 Schema Zod que valida se uma string é uma permissão válida conforme os recursos/ações definidos.
 
 ```typescript
-import { createFlatPermissionSchema } from "@synkestra/lib-http-kit";
+import { createFlatPermissionSchema } from "@authyon/http";
 import { z } from "zod";
 
 const schema = z.object({
@@ -747,7 +747,7 @@ schema.parse({ permissions: ["INVALIDO"] }); // ZodError
 Aplica validação de domínio (Value Object) dentro de um `z.superRefine`.
 
 ```typescript
-import { applyDomainValidation } from "@synkestra/lib-http-kit";
+import { applyDomainValidation } from "@authyon/http";
 import { z } from "zod";
 
 const schema = z.string().superRefine((val, ctx) => {
