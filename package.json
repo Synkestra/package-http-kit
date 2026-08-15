@@ -1,5 +1,5 @@
 {
-    "name": "@synkestra/lib-http-kit",
+    "name": "@synkestra/http-kit",
     "version": "2.0.2",
     "description": "Example HTTP helper library",
     "license": "UNLICENSED",
